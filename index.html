@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liquida 7.7 — Recursos para Afiliados Mercado Livre</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --surface-0: #f5f5f3;
+  --surface-1: #f0f0ed;
+  --surface-2: #ffffff;
+  --text-primary: #1a1a18;
+  --text-secondary: #5a5a57;
+  --text-muted: #909088;
+  --text-accent: #1859a9;
+  --text-success: #1a6b3a;
+  --text-warning: #854f0b;
+  --bg-accent: #e6f1fb;
+  --bg-success: #eaf3de;
+  --bg-warning: #faeeda;
+  --border: rgba(0,0,0,0.1);
+  --border-strong: rgba(0,0,0,0.18);
+  --radius: 8px;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-0: #1c1c1a;
+    --surface-1: #252523;
+    --surface-2: #2e2e2b;
+    --text-primary: #f0efe8;
+    --text-secondary: #aaa9a0;
+    --text-muted: #6b6b62;
+    --text-accent: #85b7eb;
+    --text-success: #97c459;
+    --text-warning: #ef9f27;
+    --bg-accent: #0c447c22;
+    --bg-success: #3b6d1122;
+    --bg-warning: #854f0b22;
+    --border: rgba(255,255,255,0.1);
+    --border-strong: rgba(255,255,255,0.18);
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--surface-0);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.page-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.email-header {
+  background: #FFE600;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.email-header h1 { font-size: 22px; font-weight: 500; color: #1a1a1a; line-height: 1.2; }
+.email-header p { font-size: 13px; color: #444; margin-top: 4px; }
+
+.meli-badge {
+  background: #1a1a1a;
+  color: #FFE600;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.tabs-bar {
+  display: flex;
+  border-bottom: 2px solid var(--border);
+  background: var(--surface-1);
+  padding: 0 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 2px;
+}
+.tabs-bar::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.tab-btn.active { color: var(--text-primary); border-bottom-color: #FFE600; font-weight: 500; }
+.tab-btn:hover:not(.active) { color: var(--text-primary); }
+.tab-btn i { font-size: 15px; }
+
+.tab-content {
+  display: none;
+  padding: 1.5rem;
+  background: var(--surface-2);
+  border: 0.5px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+}
+.tab-content.active { display: block; }
+
+.section-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 1rem;
+  padding-bottom: 8px;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title i { font-size: 18px; color: var(--text-accent); }
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1.25rem;
+}
+
+.pill {
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  background: var(--surface-1);
+  border: 0.5px solid var(--border);
+  color: var(--text-secondary);
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+.pill.active, .pill:hover {
+  background: #FFE600;
+  color: #1a1a1a;
+  border-color: #FFE600;
+}
+
+.cat-block { display: none; margin-bottom: 1.5rem; }
+.cat-block.visible { display: block; }
+
+.cat-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.cat-header h3 { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+
+.master-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-accent);
+  color: var(--text-accent);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.master-link i { font-size: 13px; }
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 6px;
+}
+
+.link-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 7px 10px;
+  background: var(--surface-1);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 12px;
+  transition: background 0.1s, border-color 0.1s;
+}
+.link-item:hover { background: var(--surface-0); border-color: var(--border-strong); }
+.link-item i { font-size: 14px; color: var(--text-muted); flex-shrink: 0; margin-top: 1px; }
+.link-obj { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+.cat-count { font-size: 11px; background: var(--surface-1); border: 0.5px solid var(--border); border-radius: 10px; padding: 2px 8px; color: var(--text-muted); }
+
+.campaign-grid { display: grid; gap: 8px; }
+.campaign-card {
+  background: var(--surface-1);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  transition: border-color 0.1s;
+}
+.campaign-card:hover { border-color: var(--border-strong); }
+.campaign-card h4 { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+
+.benefits-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.benefit-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--bg-success);
+  color: var(--text-success);
+}
+
+.campaign-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.campaign-link i { font-size: 13px; }
+
+.coupon-section { margin-bottom: 1.5rem; }
+.coupon-section-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.coupon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px;
+  background: var(--surface-1);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  text-decoration: none;
+  transition: border-color 0.1s, background 0.1s;
+}
+.coupon-item:hover { border-color: var(--border-strong); background: var(--surface-0); }
+.coupon-name { font-size: 13px; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+.coupon-name i { font-size: 16px; color: #c8a800; }
+.coupon-cta { font-size: 11px; color: var(--text-accent); display: flex; align-items: center; gap: 3px; white-space: nowrap; }
+
+.prompt-box {
+  background: var(--surface-1);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.prompt-box h3 { font-size: 14px; font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.prompt-box h3 i { font-size: 16px; color: var(--text-accent); }
+.prompt-box p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
+
+.prompt-step { display: flex; gap: 10px; margin-bottom: 10px; }
+.step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--bg-accent); color: var(--text-accent);
+  font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+.checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 10px 0; }
+.check-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-secondary); }
+.check-item i { font-size: 14px; color: var(--text-success); }
+
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 7px 16px;
+  background: var(--surface-2);
+  border: 0.5px solid var(--border-strong);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text-primary);
+  margin-top: 8px;
+  transition: background 0.1s;
+}
+.copy-btn:hover { background: var(--surface-1); }
+.copy-btn i { font-size: 14px; }
+
+.seg-block-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.footer-note {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--border);
+}
+
+@media (max-width: 480px) {
+  .links-grid { grid-template-columns: 1fr 1fr; }
+  .checklist { grid-template-columns: 1fr; }
+  body { padding: 1rem 0.5rem 3rem; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+  <div class="email-header">
+    <div>
+      <h1>Liquida 7.7 — Mercado Livre</h1>
+      <p>Recursos exclusivos para afiliados · Julho 2026</p>
+    </div>
+    <div class="meli-badge">Afiliados ML</div>
+  </div>
+
+  <div class="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab('ofertas', this)">
+      <i class="ti ti-star"></i> Top Ofertas 7.7
+    </button>
+    <button class="tab-btn" onclick="switchTab('campanhas', this)">
+      <i class="ti ti-speakerphone"></i> Campanhas 7.7
+    </button>
+    <button class="tab-btn" onclick="switchTab('cupons', this)">
+      <i class="ti ti-tag"></i> Cupons
+    </button>
+    <button class="tab-btn" onclick="switchTab('prompt', this)">
+      <i class="ti ti-robot"></i> Prompt Busca Master
+    </button>
+  </div>
+
+  <div id="tab-ofertas" class="tab-content active">
+    <div class="section-title"><i class="ti ti-flame"></i> Top ofertas por categoria</div>
+    <div class="filter-row" id="cat-filters"></div>
+    <div id="cat-blocks"></div>
+  </div>
+
+  <div id="tab-campanhas" class="tab-content">
+    <div class="section-title"><i class="ti ti-speakerphone"></i> Campanhas ativas — Liquida 7.7</div>
+    <div class="filter-row" id="camp-filters"></div>
+    <div id="camp-blocks"></div>
+  </div>
+
+  <div id="tab-cupons" class="tab-content">
+    <div class="section-title"><i class="ti ti-ticket"></i> Cupons disponíveis</div>
+    <div id="cupons-content"></div>
+  </div>
+
+  <div id="tab-prompt" class="tab-content">
+    <div class="section-title"><i class="ti ti-robot"></i> Prompt busca master — como usar</div>
+
+    <div class="prompt-box">
+      <h3><i class="ti ti-info-circle"></i> O que é este prompt?</h3>
+      <p>Um assistente especializado em SEO e busca do Mercado Livre Brasil. Ele gera as melhores URLs de pesquisa para encontrar anúncios com maior probabilidade de converter em vendas para afiliados.</p>
+    </div>
+
+    <div class="prompt-box">
+      <h3><i class="ti ti-list-check"></i> O prompt prioriza anúncios com</h3>
+      <div class="checklist">
+        <div class="check-item"><i class="ti ti-check"></i> Cupons ativos</div>
+        <div class="check-item"><i class="ti ti-check"></i> Frete grátis</div>
+        <div class="check-item"><i class="ti ti-check"></i> Mercado Envios Full</div>
+        <div class="check-item"><i class="ti ti-check"></i> Oferta do Dia</div>
+        <div class="check-item"><i class="ti ti-check"></i> MercadoLíder Platinum/Gold</div>
+        <div class="check-item"><i class="ti ti-check"></i> Parcelamento sem juros</div>
+        <div class="check-item"><i class="ti ti-check"></i> Alta reputação</div>
+        <div class="check-item"><i class="ti ti-check"></i> Grande volume de vendas</div>
+      </div>
+    </div>
+
+    <div class="prompt-box">
+      <h3><i class="ti ti-steps"></i> Como usar</h3>
+      <div class="prompt-step">
+        <div class="step-num">1</div>
+        <div class="step-text">Copie o prompt completo com o botão abaixo e cole em qualquer IA (Claude, ChatGPT etc.).</div>
+      </div>
+      <div class="prompt-step">
+        <div class="step-num">2</div>
+        <div class="step-text">Digite qualquer entrada: produto, marca, categoria, nicho ou tema. O prompt classifica automaticamente.</div>
+      </div>
+      <div class="prompt-step">
+        <div class="step-num">3</div>
+        <div class="step-text">Receba o Link Master + 5 a 12 links estratégicos prontos, cada um com objetivo comercial definido.</div>
+      </div>
+      <div class="prompt-step">
+        <div class="step-num">4</div>
+        <div class="step-text">Use os links diretamente nas suas campanhas de afiliado com alta probabilidade de conversão.</div>
+      </div>
+      <button class="copy-btn" onclick="copyPrompt()">
+        <i class="ti ti-copy"></i> Copiar prompt completo
+      </button>
+      <span id="copy-confirm" style="font-size:12px; color: var(--text-success); margin-left:8px; display:none;">Copiado!</span>
+    </div>
+
+    <div class="prompt-box">
+      <h3><i class="ti ti-bulb"></i> Exemplos de entrada</h3>
+      <p>Envie qualquer um destes tipos para o prompt:</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+        <span class="pill" style="cursor:default">Air Fryer</span>
+        <span class="pill" style="cursor:default">Tramontina</span>
+        <span class="pill" style="cursor:default">Perfumaria</span>
+        <span class="pill" style="cursor:default">Camping</span>
+        <span class="pill" style="cursor:default">Pesca</span>
+        <span class="pill" style="cursor:default">Eletrodomésticos</span>
+        <span class="pill" style="cursor:default">Tecnologia</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">Liquida 7.7 · Mercado Livre Afiliados · Julho 2026</div>
+</div>
+
+<script>
+const CATS = [
+  { name: "Moda", icon: "ti-shirt", master: "https://lista.mercadolivre.com.br/moda", links: [
+    { label: "Moda feminina", url: "https://lista.mercadolivre.com.br/moda-feminina" },
+    { label: "Moda masculina", url: "https://lista.mercadolivre.com.br/moda-masculina" },
+    { label: "Tênis casual", url: "https://lista.mercadolivre.com.br/tenis-casual" },
+    { label: "Relógios", url: "https://lista.mercadolivre.com.br/relogios" },
+    { label: "Bolsas femininas", url: "https://lista.mercadolivre.com.br/bolsas-femininas" },
+  ]},
+  { name: "Beleza", icon: "ti-sparkles", master: "https://lista.mercadolivre.com.br/beleza", links: [
+    { label: "Perfumes", url: "https://lista.mercadolivre.com.br/perfumes" },
+    { label: "Skincare", url: "https://lista.mercadolivre.com.br/skincare" },
+    { label: "Maquiagem", url: "https://lista.mercadolivre.com.br/maquiagem" },
+    { label: "Secador profissional", url: "https://lista.mercadolivre.com.br/secador-profissional" },
+    { label: "Kit beleza", url: "https://lista.mercadolivre.com.br/kit-beleza" },
+  ]},
+  { name: "Cosméticos", icon: "ti-droplet", master: "https://lista.mercadolivre.com.br/cosmeticos", links: [
+    { label: "Creme facial", url: "https://lista.mercadolivre.com.br/creme-facial" },
+    { label: "Shampoo profissional", url: "https://lista.mercadolivre.com.br/shampoo-profissional" },
+    { label: "Protetor solar", url: "https://lista.mercadolivre.com.br/protetor-solar" },
+    { label: "Kit cosméticos", url: "https://lista.mercadolivre.com.br/kit-cosmeticos" },
+    { label: "Cosméticos profissionais", url: "https://lista.mercadolivre.com.br/cosmeticos-profissionais" },
+  ]},
+  { name: "Perfumaria", icon: "ti-bottle", master: "https://lista.mercadolivre.com.br/perfumaria", links: [
+    { label: "Perfume importado", url: "https://lista.mercadolivre.com.br/perfume-importado", obj: "Produtos premium" },
+    { label: "Perfume feminino", url: "https://lista.mercadolivre.com.br/perfume-feminino", obj: "Alta procura" },
+    { label: "Perfume masculino", url: "https://lista.mercadolivre.com.br/perfume-masculino", obj: "Presentes e uso diário" },
+    { label: "Kit perfume", url: "https://lista.mercadolivre.com.br/kit-perfume", obj: "Maior ticket médio" },
+    { label: "Body splash", url: "https://lista.mercadolivre.com.br/body-splash", obj: "Tendência de mercado" },
+    { label: "Hidratante corporal", url: "https://lista.mercadolivre.com.br/hidratante-corporal", obj: "Complementar" },
+    { label: "Desodorante", url: "https://lista.mercadolivre.com.br/desodorante", obj: "Grande volume" },
+    { label: "Perfume árabe", url: "https://lista.mercadolivre.com.br/perfume-arabe", obj: "Tendência crescente" },
+  ]},
+  { name: "Casa e Decoração", icon: "ti-home", master: "https://lista.mercadolivre.com.br/casa-decoracao", links: [
+    { label: "Decoração sala", url: "https://lista.mercadolivre.com.br/decoracao-sala", obj: "Mais vendidos" },
+    { label: "Organização casa", url: "https://lista.mercadolivre.com.br/organizacao-casa", obj: "Alto giro" },
+    { label: "Iluminação decorativa", url: "https://lista.mercadolivre.com.br/iluminacao-decorativa", obj: "Premium" },
+    { label: "Utensílios cozinha", url: "https://lista.mercadolivre.com.br/utensilios-cozinha", obj: "Kits" },
+    { label: "Decoração moderna", url: "https://lista.mercadolivre.com.br/decoracao-moderna", obj: "Tendências" },
+  ]},
+  { name: "Tecnologia", icon: "ti-device-laptop", master: "https://lista.mercadolivre.com.br/tecnologia", links: [
+    { label: "Smartphone", url: "https://lista.mercadolivre.com.br/smartphone", obj: "Categoria líder" },
+    { label: "iPhone", url: "https://lista.mercadolivre.com.br/iphone", obj: "Premium" },
+    { label: "Samsung Galaxy", url: "https://lista.mercadolivre.com.br/samsung-galaxy", obj: "Grande volume" },
+    { label: "Notebook", url: "https://lista.mercadolivre.com.br/notebook", obj: "Uso profissional" },
+    { label: "PC Gamer", url: "https://lista.mercadolivre.com.br/pc-gamer", obj: "Ticket elevado" },
+    { label: "Smartwatch", url: "https://lista.mercadolivre.com.br/smartwatch", obj: "Wearables" },
+    { label: "Fone bluetooth", url: "https://lista.mercadolivre.com.br/fone-bluetooth", obj: "Alta conversão" },
+    { label: "Câmera segurança Wi-Fi", url: "https://lista.mercadolivre.com.br/camera-seguranca-wifi", obj: "Casa inteligente" },
+  ]},
+  { name: "Eletrodomésticos", icon: "ti-plug", master: "https://lista.mercadolivre.com.br/eletrodomesticos", links: [
+    { label: "Air fryer", url: "https://lista.mercadolivre.com.br/air-fryer", obj: "Campeão de vendas" },
+    { label: "Geladeira", url: "https://lista.mercadolivre.com.br/geladeira", obj: "Linha premium" },
+    { label: "Máquina de lavar", url: "https://lista.mercadolivre.com.br/maquina-de-lavar", obj: "Essencial" },
+    { label: "Aspirador robô", url: "https://lista.mercadolivre.com.br/aspirador-robo", obj: "Tecnologia residencial" },
+    { label: "Cafeteira", url: "https://lista.mercadolivre.com.br/cafeteira", obj: "Premium" },
+    { label: "Purificador de água", url: "https://lista.mercadolivre.com.br/purificador-de-agua", obj: "Saúde" },
+    { label: "Climatizador", url: "https://lista.mercadolivre.com.br/climatizador", obj: "Sazonal" },
+  ]},
+  { name: "Tênis de Corrida", icon: "ti-run", master: "https://lista.mercadolivre.com.br/tenis-corrida", links: [
+    { label: "Corrida masculino", url: "https://lista.mercadolivre.com.br/tenis-corrida-masculino" },
+    { label: "Corrida feminino", url: "https://lista.mercadolivre.com.br/tenis-corrida-femininio" },
+    { label: "Running premium", url: "https://lista.mercadolivre.com.br/tenis-running" },
+    { label: "Tênis amortecimento", url: "https://lista.mercadolivre.com.br/tenis-amortecimento" },
+    { label: "Corrida original", url: "https://lista.mercadolivre.com.br/tenis-corrida-original" },
+  ]},
+  { name: "Acessórios Moto", icon: "ti-motorbike", master: "https://lista.mercadolivre.com.br/acessorios-moto", links: [
+    { label: "Capacete", url: "https://lista.mercadolivre.com.br/capacete-moto" },
+    { label: "Baú moto", url: "https://lista.mercadolivre.com.br/bau-moto" },
+    { label: "Intercomunicador", url: "https://lista.mercadolivre.com.br/intercomunicador-moto" },
+    { label: "Suporte celular moto", url: "https://lista.mercadolivre.com.br/suporte-celular-moto" },
+    { label: "Jaqueta motociclista", url: "https://lista.mercadolivre.com.br/jaqueta-motociclista" },
+  ]},
+  { name: "Acessórios Carro", icon: "ti-car", master: "https://lista.mercadolivre.com.br/acessorios-carro", links: [
+    { label: "Multimídia automotiva", url: "https://lista.mercadolivre.com.br/multimidia-automotiva" },
+    { label: "Câmera de ré", url: "https://lista.mercadolivre.com.br/camera-re" },
+    { label: "Kit limpeza automotiva", url: "https://lista.mercadolivre.com.br/kit-limpeza-automotiva" },
+  ]},
+  { name: "Suplementos", icon: "ti-barbell", master: "https://lista.mercadolivre.com.br/suplementos", links: [
+    { label: "Whey protein", url: "https://lista.mercadolivre.com.br/whey-protein" },
+    { label: "Creatina", url: "https://lista.mercadolivre.com.br/creatina" },
+    { label: "Pré treino", url: "https://lista.mercadolivre.com.br/pre-treino" },
+    { label: "BCAA", url: "https://lista.mercadolivre.com.br/bcaa" },
+    { label: "Kit suplementos", url: "https://lista.mercadolivre.com.br/kit-suplementos" },
+  ]},
+  { name: "Ferramentas", icon: "ti-tool", master: "https://lista.mercadolivre.com.br/ferramentas", links: [
+    { label: "Furadeira", url: "https://lista.mercadolivre.com.br/furadeira" },
+    { label: "Parafusadeira", url: "https://lista.mercadolivre.com.br/parafusadeira" },
+    { label: "Jogo de ferramentas", url: "https://lista.mercadolivre.com.br/jogo-ferramentas" },
+    { label: "Kit ferramentas", url: "https://lista.mercadolivre.com.br/kit-ferramentas" },
+  ]},
+  { name: "Construção", icon: "ti-building", master: "https://lista.mercadolivre.com.br/material-construcao", links: [
+    { label: "Tintas", url: "https://lista.mercadolivre.com.br/tintas" },
+    { label: "Piso vinílico", url: "https://lista.mercadolivre.com.br/piso-vinilico" },
+    { label: "Ferragens", url: "https://lista.mercadolivre.com.br/ferragens" },
+    { label: "Iluminação", url: "https://lista.mercadolivre.com.br/iluminacao" },
+    { label: "Hidráulica", url: "https://lista.mercadolivre.com.br/hidraulica" },
+  ]},
+];
+
+const CAMPS = [
+  { seg: "Moda e Beleza", icon: "ti-shirt", items: [
+    { name: "Fashion — estilo de inverno", benefits: ["60% Off","Frete Grátis","Full"], url: "https://lista.mercadolivre.com.br/_Container_moda-inverno-26" },
+    { name: "Fashion — no precinho (regional)", benefits: ["60% Off","Frete Grátis","Cupons"], url: "https://lista.mercadolivre.com.br/_Container_achadinhos-ne-fashion" },
+    { name: "Beauty — liquida inverno", benefits: ["70% Off","Frete Grátis","Full"], url: "https://lista.mercadolivre.com.br/_Container_jul26-liquida-inverno" },
+    { name: "Beauty — make up (mulheres)", benefits: ["60% Off","Frete Grátis","Full"], url: "https://lista.mercadolivre.com.br/_Container_jul26-makes-virais" },
+  ]},
+  { seg: "Casa e Decoração", icon: "ti-home", items: [
+    { name: "FH — seleção premium", benefits: ["40% Off","Full"], url: "https://lista.mercadolivre.com.br/_Container_fh-casa-premium-mai" },
+    { name: "FH — Casa Cor (mulheres)", benefits: ["Cupons","Frete Grátis"], url: "https://www.mercadolivre.com.br/ofertas/casacor-mercado-livre" },
+    { name: "CI — projetos", benefits: ["50% Off","18x MP","Frete Grátis"], url: "https://lista.mercadolivre.com.br/_Container_ci-cuotas-extras-jul-18x" },
+    { name: "CI — lazer garantido (regional)", benefits: ["60% Off","Full","Frete Grátis"], url: "https://lista.mercadolivre.com.br/_Container_ci-query-cupom-ho-regional" },
+  ]},
+  { seg: "Tech e Eletrodom", icon: "ti-device-laptop", items: [
+    { name: "Tech — tecno confiável", benefits: ["35% Off","Envio rápido"], url: "https://lista.mercadolivre.com.br/_Container_tech-confiavel-para-quem-busca-resultados-extraordinarios" },
+    { name: "Tech — férias (jovens)", benefits: ["35% Off","Envio rápido"], url: "https://lista.mercadolivre.com.br/_Container_geral-tech-2026" },
+    { name: "HomeEletro — seleção TVs", benefits: ["50% Off","Frete Grátis","18x MP"], url: "https://lista.mercadolivre.com.br/_Container_geral-tvs" },
+    { name: "HomeEletro — verão (regional)", benefits: ["60% Off","Frete Grátis"], url: "https://lista.mercadolivre.com.br/_Container_ventilacao-ne" },
+  ]},
+  { seg: "Esportes e Outros", icon: "ti-run", items: [
+    { name: "Sports — mundo esporte", benefits: ["70% Off","Frete Grátis","Full"], url: "https://lista.mercadolivre.com.br/_Container_sports-high-riu" },
+    { name: "Sports — bike nova (mulheres)", benefits: ["60% Off","Cupons","Full"], url: "https://lista.mercadolivre.com.br/_Container_mulheres-ciclismo-sov" },
+    { name: "Health — whey e creatina", benefits: ["50% Off","Frete Grátis","Full"], url: "https://lista.mercadolivre.com.br/_Container_suplementos-geral?forceContainer=true" },
+    { name: "TB — Minions", benefits: ["60% Off","Frete Grátis","Full"], url: "https://lista.mercadolivre.com.br/_Container_descontos-monstruosos" },
+    { name: "TB — achadinhos (mulheres)", benefits: ["50% Off","Frete Grátis","Full"], url: "https://lista.mercadolivre.com.br/_Container_achadinhos-irresistiveis" },
+    { name: "CBT — Liquida Internacional", benefits: ["50% Off","Frete Grátis"], url: "https://lista.mercadolivre.com.br/importados/compra-internacional/_Container_lpsm-liquida-7-7-internacional?forceContainer=true" },
+    { name: "VPA — revisão em dia", benefits: ["40% Off","PIX","Full"], url: "https://lista.mercadolivre.com.br/_Container_ap-ms-semana-28" },
+    { name: "PromoBaby", benefits: ["Descontos","Bebês"], url: "https://lista.mercadolivre.com.br/_Container_cpg-promobaby-super-e-nsuper" },
+    { name: "Nordeste — o melhor da região", benefits: ["Regional","Frete"], url: "https://lista.mercadolivre.com.br/_Container_cpg-nordeste-regional" },
+  ]},
+];
+
+const CUPONS = [
+  { sec: "Geral", items: [
+    { name: "Top cupons — até R$1.000 OFF", url: "https://www.mercadolivre.com.br/cupons/filter?all=true&price=true&source_page=int_view_more_grouping" },
+    { name: "Link master Liquida ML", url: "https://www.mercadolivre.com.br/ofertas/liquida-mercado-livre" },
+  ]},
+  { sec: "Marcas", items: [
+    { name: "Motorola", url: "https://lista.mercadolivre.com.br/_Container_13560670?coupon_campaign_id=13560670" },
+  ]},
+  { sec: "Casa", items: [
+    { name: "11% OFF Home", url: "https://lista.mercadolivre.com.br/_CustId_622556468?coupon_campaign_id=13272353" },
+    { name: "Smart Home", url: "https://lista.mercadolivre.com.br/_Container_13210315?coupon_campaign_id=13210315" },
+  ]},
+  { sec: "Beleza e cuidado pessoal", items: [
+    { name: "Kérastase — R$80 OFF", url: "https://lista.mercadolivre.com.br/_Container_13890598?coupon_campaign_id=13890598" },
+    { name: "Cetaphil — 15% OFF", url: "https://lista.mercadolivre.com.br/_Container_13290655?coupon_campaign_id=13290655" },
+  ]},
+  { sec: "Moda", items: [
+    { name: "Converse — 20% OFF", url: "https://lista.mercadolivre.com.br/_Container_13265663?coupon_campaign_id=13265663" },
+  ]},
+  { sec: "Bebês", items: [
+    { name: "Passeio bebês", url: "https://lista.mercadolivre.com.br/_Container_13286229?coupon_campaign_id=13286229" },
+  ]},
+];
+
+const PROMPT_TEXT = `Atue como um Especialista em SEO, Engenharia de Busca, Marketing de Afiliados e Algoritmos do Mercado Livre Brasil.
+
+Sua missão é gerar as melhores URLs de pesquisa possíveis dentro do Mercado Livre Brasil, priorizando pesquisas que tenham maior probabilidade de encontrar anúncios com: Cupons, Ofertas Oficiais, Oferta do Dia, Descontos, Parcelamento sem juros, Frete Grátis, Mercado Envios Full, Produtos Novos, MercadoLíder Platinum, MercadoLíder Gold, Alta reputação, Grande volume de vendas.
+
+Utilize apenas URLs válidas do Mercado Livre Brasil.
+
+PROCESSO OBRIGATÓRIO:
+Etapa 1 — Classificar automaticamente a entrada (Produto, Marca, Categoria, Subcategoria, Nicho, Segmento, Tema).
+Etapa 2 — Traduzir para Português do Brasil se necessário.
+Etapa 3 — Pesquisa SEO: identificar palavras mais buscadas, termos comerciais, sinônimos, marcas relacionadas.
+Etapa 4 — Expansão: gerar pesquisas para produtos mais vendidos, linhas, acessórios, kits, versões premium.
+Etapa 5 — Priorização comercial: focar em cupons, promoções, frete grátis, Full, parcelamento.
+Etapa 6 — Construção das URLs: slugs em letras minúsculas, sem acentos, espaços substituídos por hífen. Formato: https://lista.mercadolivre.com.br/[slug]
+Etapa 7 — Link Master: a melhor pesquisa principal para aquela intenção de compra.
+Etapa 8 — Links Estratégicos: 5 a 12 links com intenções distintas (mais vendidos, premium, kits, lançamentos, promoções...).
+Etapa 9 — Organizar resposta com: Categoria identificada, Tipo, Link Master com motivo da escolha, Links Estratégicos com objetivo comercial, e Dica para Afiliados.`;
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function filterCat(catId, pill, scope, blockAttr) {
+  document.querySelectorAll('#' + scope + ' .pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  document.querySelectorAll('[' + blockAttr + ']').forEach(b => {
+    b.classList.toggle('visible', catId === 'all' || b.getAttribute(blockAttr) == catId);
+  });
+}
+
+function buildOfertas() {
+  const fEl = document.getElementById('cat-filters');
+  const bEl = document.getElementById('cat-blocks');
+  const all = mkPill('Todas', () => filterCat('all', all, 'cat-filters', 'data-ci'), true);
+  fEl.appendChild(all);
+  CATS.forEach((cat, i) => {
+    const p = mkPill(cat.name, () => filterCat(i, p, 'cat-filters', 'data-ci'));
+    fEl.appendChild(p);
+    const block = document.createElement('div');
+    block.className = 'cat-block visible';
+    block.setAttribute('data-ci', i);
+    block.innerHTML = `
+      <div class="cat-header">
+        <i class="ti ${cat.icon}" style="font-size:16px;color:var(--text-accent)"></i>
+        <h3>${cat.name}</h3>
+        <span class="cat-count">${cat.links.length} links</span>
+      </div>
+      <a href="${cat.master}" class="master-link" target="_blank">
+        <i class="ti ti-trophy"></i> Link master <i class="ti ti-external-link" style="font-size:11px"></i>
+      </a>
+      <div class="links-grid">
+        ${cat.links.map(l => `
+          <a href="${l.url}" class="link-item" target="_blank">
+            <i class="ti ti-link"></i>
+            <div><div>${l.label}</div>${l.obj ? `<div class="link-obj">${l.obj}</div>` : ''}</div>
+          </a>`).join('')}
+      </div>`;
+    bEl.appendChild(block);
+  });
+}
+
+function buildCampanhas() {
+  const fEl = document.getElementById('camp-filters');
+  const bEl = document.getElementById('camp-blocks');
+  const all = mkPill('Todas', () => filterCat('all', all, 'camp-filters', 'data-ci2'), true);
+  fEl.appendChild(all);
+  CAMPS.forEach((seg, i) => {
+    const p = mkPill(seg.seg, () => filterCat(i, p, 'camp-filters', 'data-ci2'));
+    fEl.appendChild(p);
+    const block = document.createElement('div');
+    block.className = 'cat-block visible';
+    block.setAttribute('data-ci2', i);
+    block.style.marginBottom = '1.5rem';
+    const title = document.createElement('div');
+    title.className = 'seg-block-title';
+    title.innerHTML = `<i class="ti ${seg.icon}"></i> ${seg.seg}`;
+    block.appendChild(title);
+    const grid = document.createElement('div');
+    grid.className = 'campaign-grid';
+    seg.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'campaign-card';
+      card.innerHTML = `
+        <h4>${item.name}</h4>
+        <div class="benefits-row">${item.benefits.map(b => `<span class="benefit-badge">${b}</span>`).join('')}</div>
+        <a href="${item.url}" class="campaign-link" target="_blank">Acessar campanha <i class="ti ti-external-link"></i></a>`;
+      grid.appendChild(card);
+    });
+    block.appendChild(grid);
+    bEl.appendChild(block);
+  });
+}
+
+function buildCupons() {
+  const el = document.getElementById('cupons-content');
+  CUPONS.forEach(sec => {
+    const div = document.createElement('div');
+    div.className = 'coupon-section';
+    div.innerHTML = `<div class="coupon-section-title">${sec.sec}</div>`;
+    sec.items.forEach(item => {
+      const a = document.createElement('a');
+      a.className = 'coupon-item';
+      a.href = item.url;
+      a.target = '_blank';
+      a.innerHTML = `
+        <span class="coupon-name"><i class="ti ti-ticket"></i>${item.name}</span>
+        <span class="coupon-cta">Ver oferta <i class="ti ti-arrow-right"></i></span>`;
+      div.appendChild(a);
+    });
+    el.appendChild(div);
+  });
+}
+
+function mkPill(label, fn, active) {
+  const p = document.createElement('span');
+  p.className = 'pill' + (active ? ' active' : '');
+  p.textContent = label;
+  p.onclick = fn;
+  return p;
+}
+
+function copyPrompt() {
+  navigator.clipboard.writeText(PROMPT_TEXT).then(() => {
+    const c = document.getElementById('copy-confirm');
+    c.style.display = 'inline';
+    setTimeout(() => c.style.display = 'none', 2500);
+  });
+}
+
+buildOfertas();
+buildCampanhas();
+buildCupons();
+</script>
+</body>
+</html>
